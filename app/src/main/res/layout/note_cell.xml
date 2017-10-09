@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="5sp"
+    android:background="@drawable/note_cell_bg"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        android:background="@drawable/note_title_bg"
+        android:textSize="25sp"
+        android:padding="1sp"
+        android:textAlignment="center"
+        android:text="Do nauki!"
+        android:id="@+id/note_title"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/note_title"
+        android:padding="4sp"
+        android:textSize="15sp"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ultrices odio quis tincidunt viverra. Integer urna orci, rhoncus nec imperdiet sit amet, maximus vel turpis. "
+        android:id="@+id/note_description"/>
+
+</RelativeLayout>
