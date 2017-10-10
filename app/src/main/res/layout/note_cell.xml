@@ -24,7 +24,7 @@
         android:layout_below="@id/note_title"
         android:padding="4sp"
         android:textSize="15sp"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ultrices odio quis tincidunt viverra. Integer urna orci, rhoncus nec imperdiet sit amet, maximus vel turpis. "
+        android:text=""
         android:id="@+id/note_description"/>
 
 </RelativeLayout>

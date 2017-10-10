@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import static android.R.id.input;
+
 public class MainActivity extends AppCompatActivity {
 
     String titles[] = {"Nie ma opierdalania się!", "Do roboty!", "Weź się za siebie!", "Idź na wykład!", "trolololo XD"};
@@ -39,13 +41,12 @@ public class MainActivity extends AppCompatActivity {
         for (int i=0;i<titles.length;i++){
             final NoteCell noteCell = new NoteCell(MainActivity.this,
                     titles[titles.length-i-1], descriptions[titles.length-i-1], reminders[titles.length-i-1]);
-            noteCell.setId(i);
+            noteCell.setId(titles.length-i-1);
             mainScrlLin.addView(noteCell);
 
             noteCell.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(MainActivity.this, "klik", Toast.LENGTH_SHORT).show();
                     int i = noteCell.getId();
                     openNote(i);
                 }
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, NoteActivity.class);
             }
         });
     }
@@ -88,11 +90,6 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        //if (id == R.id.action_settings) {
-        //    return true;
-        //}
 
         return super.onOptionsItemSelected(item);
     }

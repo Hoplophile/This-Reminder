@@ -6,44 +6,36 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.EditText;
 
 /**
- * Created by piotr on 09.10.2017.
+ * Created by piotr on 10.10.2017.
  */
 
-public class NoteActivity extends AppCompatActivity {
+public class EditNoteActivity extends AppCompatActivity {
 
     String title;
     String description;
     String reminder;
-    TextView title_tv;
-    TextView description_tv;
-    TextView reminder_tv;
+    EditText edit_title;
+    EditText edit_description;
+    EditText edit_reminder;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.note);
+        setContentView(R.layout.edit_note);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Intent intent = getIntent();
 
-        title_tv = (TextView)findViewById(R.id.note_title);
-        description_tv = (TextView)findViewById(R.id.note_description);
-        reminder_tv = (TextView)findViewById(R.id.note_reminder);
 
-        title = intent.getStringExtra("title");
-        title_tv.setText(title);
-        description_tv.setText(description);
-        reminder_tv.setText(reminder);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_note, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -55,10 +47,9 @@ public class NoteActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_edit) {
-            Toast.makeText(NoteActivity.this, "klik", Toast.LENGTH_SHORT).show();
-            return true;
-        }
+        //if (id == R.id.action_settings) {
+        //    return true;
+        //}
 
         return super.onOptionsItemSelected(item);
     }

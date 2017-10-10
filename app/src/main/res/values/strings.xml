@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">This Reminder</string>
     <string name="action_settings">Settings</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ultrices odio quis tincidunt viverra. Integer urna orci, rhoncus nec imperdiet sit amet, maximus vel turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ultrices odio quis tincidunt viverra. Integer urna orci, rhoncus nec imperdiet sit amet, maximus vel turpis.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ultrices odio quis tincidunt viverra. Integer urna orci, rhoncus nec imperdiet sit amet, maximus vel turlit. Etiam ultrices odio quis tincidunt viverra. Integer urna orci, rhoncus nec imperdiet sit amet, maximus vel turlit. Etiam ultrices odio quis tincidunt viverra. Integer urna orci, rhoncus nec imperdiet sit amet, maximus vel turlit. Etiam ultrices odio quis tincidunt viverra. Integer urna orci, rhoncus nec imperdiet sit amet, maximus vel turpis.</string>
 </resources>
