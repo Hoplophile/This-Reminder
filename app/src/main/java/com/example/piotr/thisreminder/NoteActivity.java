@@ -18,6 +18,7 @@ public class NoteActivity extends AppCompatActivity {
     String title;
     String description;
     String reminder;
+    int id;
     TextView title_tv;
     TextView description_tv;
     TextView reminder_tv;
@@ -35,6 +36,9 @@ public class NoteActivity extends AppCompatActivity {
         reminder_tv = (TextView)findViewById(R.id.note_reminder);
 
         title = intent.getStringExtra("title");
+        description = intent.getStringExtra("description");
+        reminder = intent.getStringExtra("reminder");
+        id = intent.getIntExtra("id", -1);
         title_tv.setText(title);
         description_tv.setText(description);
         reminder_tv.setText(reminder);
@@ -56,7 +60,12 @@ public class NoteActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_edit) {
-            Toast.makeText(NoteActivity.this, "klik", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(NoteActivity.this, EditNoteActivity.class);
+            intent.putExtra("title", title);
+            intent.putExtra("description", description);
+            intent.putExtra("reminder", reminder);
+            intent.putExtra("id", id);
+            startActivity(intent);
             return true;
         }
 

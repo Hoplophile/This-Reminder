@@ -1,6 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:id="@+id/appbar">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/appbar">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Do roboty!"
+            android:textAlignment="center"
+            android:padding="5sp"
+            android:textSize="35sp"
+            android:id="@+id/edit_note_title"
+            android:textColor="@color/colorAccent"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="44sp"
+            android:padding="5sp"
+            android:id="@+id/edit_main"
+            android:layout_below="@id/edit_note_title">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lorem_ipsum"
+                android:textSize="25sp"
+                android:background="@drawable/note_cell_bg"
+                android:padding="4sp"
+                android:id="@+id/edit_note_description" />
+
+        </ScrollView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorAccent"
+        android:padding="4sp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reminder at: "
+            android:textSize="30sp"
+            android:id="@+id/Reminderat"
+            android:layout_centerVertical="true"/>
+
+         <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="14:05"
+            android:textSize="25sp"
+            android:id="@+id/edit_note_reminder"
+            android:layout_toRightOf="@id/Reminderat"/>
+    </RelativeLayout>
 </RelativeLayout>

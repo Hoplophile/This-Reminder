@@ -1,7 +1,9 @@
 package com.example.piotr.thisreminder;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.Set;
 
 import static android.R.id.input;
 
@@ -37,6 +41,66 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        SharedPreferences sharedPreferences = new SharedPreferences() {
+            @Override
+            public Map<String, ?> getAll() {
+                return null;
+            }
+
+            @Nullable
+            @Override
+            public String getString(String key, @Nullable String defValue) {
+                return null;
+            }
+
+            @Nullable
+            @Override
+            public Set<String> getStringSet(String key, @Nullable Set<String> defValues) {
+                return null;
+            }
+
+            @Override
+            public int getInt(String key, int defValue) {
+                return 0;
+            }
+
+            @Override
+            public long getLong(String key, long defValue) {
+                return 0;
+            }
+
+            @Override
+            public float getFloat(String key, float defValue) {
+                return 0;
+            }
+
+            @Override
+            public boolean getBoolean(String key, boolean defValue) {
+                return false;
+            }
+
+            @Override
+            public boolean contains(String key) {
+                return false;
+            }
+
+            @Override
+            public Editor edit() {
+                return null;
+            }
+
+            @Override
+            public void registerOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener listener) {
+
+            }
+
+            @Override
+            public void unregisterOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener listener) {
+
+            }
+        };
+
+
         LinearLayout mainScrlLin = (LinearLayout)findViewById(R.id.mainScrlLin);
         for (int i=0;i<titles.length;i++){
             final NoteCell noteCell = new NoteCell(MainActivity.this,
@@ -47,8 +111,8 @@ public class MainActivity extends AppCompatActivity {
             noteCell.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int i = noteCell.getId();
-                    openNote(i);
+                    int id = noteCell.getId();
+                    openNote(id);
                 }
             });
             noteCell.setOnLongClickListener(new View.OnLongClickListener() {
@@ -64,7 +128,11 @@ public class MainActivity extends AppCompatActivity {
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, NoteActivity.class);
+                Intent intent = new Intent(MainActivity.this, EditNoteActivity.class);
+                intent.putExtra("title", "");
+                intent.putExtra("description", "");
+                intent.putExtra("reminder", "");
+                startActivity(intent);
             }
         });
     }
@@ -74,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("title", titles[i]);
         intent.putExtra("description", descriptions[i]);
         intent.putExtra("reminder", reminders[i]);
+        intent.putExtra("id", i);
         startActivity(intent);
     }
 

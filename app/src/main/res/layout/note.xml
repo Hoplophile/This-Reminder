@@ -66,8 +66,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reminder at 14:05"
+            android:text="Reminder at: "
             android:textSize="30sp"
-            android:id="@+id/note_reminder"/>
+            android:id="@+id/Reminderat"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="14:05"
+            android:textSize="30sp"
+            android:id="@+id/note_reminder"
+            android:layout_toRightOf="@id/Reminderat"/>
     </RelativeLayout>
 </RelativeLayout>
