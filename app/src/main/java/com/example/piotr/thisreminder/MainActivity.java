@@ -3,6 +3,7 @@ package com.example.piotr.thisreminder;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -23,6 +24,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static android.R.id.input;
+import static android.R.id.shareText;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eget suscipit diam. ",
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eget suscipit diam. Integer vitae ante et quam viverra bibendum non non justo."};
     String reminders[] = {"13:03", "12:05", "9:30", "16:29", "01:00"};
+    int notesQuantity = 0, i=0;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,88 +45,34 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        SharedPreferences sharedPreferences = new SharedPreferences() {
-            @Override
-            public Map<String, ?> getAll() {
-                return null;
-            }
-
-            @Nullable
-            @Override
-            public String getString(String key, @Nullable String defValue) {
-                return null;
-            }
-
-            @Nullable
-            @Override
-            public Set<String> getStringSet(String key, @Nullable Set<String> defValues) {
-                return null;
-            }
-
-            @Override
-            public int getInt(String key, int defValue) {
-                return 0;
-            }
-
-            @Override
-            public long getLong(String key, long defValue) {
-                return 0;
-            }
-
-            @Override
-            public float getFloat(String key, float defValue) {
-                return 0;
-            }
-
-            @Override
-            public boolean getBoolean(String key, boolean defValue) {
-                return false;
-            }
-
-            @Override
-            public boolean contains(String key) {
-                return false;
-            }
-
-            @Override
-            public Editor edit() {
-                return null;
-            }
-
-            @Override
-            public void registerOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener listener) {
-
-            }
-
-            @Override
-            public void unregisterOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener listener) {
-
-            }
-        };
-
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        loadNotes();
 
         LinearLayout mainScrlLin = (LinearLayout)findViewById(R.id.mainScrlLin);
-        for (int i=0;i<titles.length;i++){
-            final NoteCell noteCell = new NoteCell(MainActivity.this,
-                    titles[titles.length-i-1], descriptions[titles.length-i-1], reminders[titles.length-i-1]);
-            noteCell.setId(titles.length-i-1);
-            mainScrlLin.addView(noteCell);
 
-            noteCell.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int id = noteCell.getId();
-                    openNote(id);
-                }
-            });
-            noteCell.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    Toast.makeText(MainActivity.this, "KLIK", Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-            });
-        }
+        try {
+            for (int i = 0; i < notesQuantity; i++) {
+                final NoteCell noteCell = new NoteCell(MainActivity.this,
+                        titles[titles.length - i - 1], descriptions[titles.length - i - 1], reminders[titles.length - i - 1]);
+                noteCell.setId(titles.length - i - 1);
+                mainScrlLin.addView(noteCell);
+
+                noteCell.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int id = noteCell.getId();
+                        openNote(id);
+                    }
+                });
+                noteCell.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        Toast.makeText(MainActivity.this, "KLIK", Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                });
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {}
 
         Button add_btn = (Button)findViewById(R.id.add_btn);
         add_btn.setOnClickListener(new View.OnClickListener() {
@@ -132,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("title", "");
                 intent.putExtra("description", "");
                 intent.putExtra("reminder", "");
+                intent.putExtra("id", notesQuantity);
                 startActivity(intent);
             }
         });
@@ -144,6 +95,20 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("reminder", reminders[i]);
         intent.putExtra("id", i);
         startActivity(intent);
+    }
+
+    public void loadNotes(){
+        try {
+            sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+            notesQuantity = sharedPreferences.getInt("notesQuantity", 0);
+            for (i = 0; i < notesQuantity-1; i++) {
+                titles[i] = sharedPreferences.getString(i + "title", "");
+                descriptions[i] = sharedPreferences.getString(i + "description", "");
+                reminders[i] = sharedPreferences.getString(i + "reminder", "");
+            }
+        } catch (Exception e){
+            Toast.makeText(MainActivity.this, "Couldn't load notes", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -161,5 +126,12 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        loadNotes();
     }
 }
